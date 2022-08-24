@@ -14,7 +14,7 @@
 ///
 ///
 
-library tiled_utils;
+library flame_tiled_utils;
 
 export 'src/animation_batch_compiler.dart';
 export 'src/image_batch_compiler.dart';

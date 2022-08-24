@@ -1,7 +1,7 @@
-name: tiled_utils
+name: flame_tiled_utils
 description: A set of useful utils to extend tiled functionality
 version: 1.0.0
-# homepage: https://www.example.com
+homepage: https://github.com/ASGAlex/flame_tiled_utils
 
 environment:
   sdk: '>=2.17.6 <3.0.0'
