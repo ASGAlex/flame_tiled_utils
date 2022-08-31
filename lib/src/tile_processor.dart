@@ -7,7 +7,7 @@ import 'package:flame/image_composition.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:tiled/tiled.dart';
 
-typedef TileProcessorFunc = void Function(
+typedef TileProcessorFunc = Future Function(
     TileProcessor tile, Vector2 position, Vector2 size);
 
 /// Utility class allows to process each map tile individually
@@ -154,11 +154,11 @@ class TileProcessor {
     }
   }
 
-  static void processTileType(
+  static Future processTileType(
       {required RenderableTiledMap tileMap,
       required Map<String, TileProcessorFunc> processorByType,
       required List<String> layersToLoad,
-      bool clear = true}) {
+      bool clear = true}) async {
     for (final layer in layersToLoad) {
       final tileLayer = tileMap.getLayer<TileLayer>(layer);
       final tileData = tileLayer?.data;
@@ -179,7 +179,7 @@ class TileProcessor {
             final processor = processorByType[tileData.type];
             if (processor != null) {
               final tileProcessor = TileProcessor(tileData, tileset);
-              processor(
+              await processor(
                   tileProcessor,
                   position,
                   Vector2(tileMap.map.tileWidth.toDouble(),
