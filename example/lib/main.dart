@@ -67,7 +67,7 @@ class TestGame extends FlameGame with KeyboardEvents, ScrollDetector {
         TileProcessor.processTileType(
             tileMap: tiledComponent.tileMap,
             processorByType: <String, TileProcessorFunc>{
-              'water': ((tile, position, size) {
+              'water': ((tile, position, size) async {
                 // saving tile for merge
                 animationCompiler.addTile(position, tile);
               }),
