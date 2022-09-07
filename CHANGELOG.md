@@ -1,3 +1,8 @@
+## 1.0.3
+
+- Update examples, use toImageSafe for images recording
+
+
 ## 1.0.2
 
 - Make TileProcessor.processTileType async

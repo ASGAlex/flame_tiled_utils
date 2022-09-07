@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:ui';
 
 import 'package:flame/components.dart';
+import 'package:flame/image_composition.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:tiled/tiled.dart';
 
@@ -38,7 +39,7 @@ class ImageBatchCompiler {
       rl.refreshCache();
     }
 
-    final image = await picture.toImage(
+    final image = await picture.toImageSafe(
         tileMap.map.width * tileMap.map.tileWidth,
         tileMap.map.height * tileMap.map.tileHeight);
 

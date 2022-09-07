@@ -11,3 +11,10 @@ Change `MapRenderingMode` parameter of `TestGame` to compare Flame performance i
   animated layer. Dramatically low FPS, totally unusable.
 - `MapRenderingMode.optimizedWithAnimation` - fully optimized map rendering, average 60 FPS on
   desktop.
+
+For Flutter Web <= 3.3.0 example should be launched this way:
+```shell
+flutter run -d chrome --dart-define=BROWSER_IMAGE_DECODING_ENABLED=false
+```
+
+Non-web builds works fine out-of-the-box.

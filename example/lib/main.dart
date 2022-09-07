@@ -64,12 +64,12 @@ class TestGame extends FlameGame with KeyboardEvents, ScrollDetector {
         // Optimal way to work with big number of animated tiles
         // Creating compiler to save all tiles to be merged;
         final animationCompiler = AnimationBatchCompiler();
-        TileProcessor.processTileType(
+        await TileProcessor.processTileType(
             tileMap: tiledComponent.tileMap,
             processorByType: <String, TileProcessorFunc>{
               'water': ((tile, position, size) async {
                 // saving tile for merge
-                animationCompiler.addTile(position, tile);
+                return animationCompiler.addTile(position, tile);
               }),
             },
             layersToLoad: [
