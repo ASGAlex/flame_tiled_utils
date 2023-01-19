@@ -1,3 +1,7 @@
+## 1.0.5
+
+- Cosmetic fixes for pub.dev
+
 ## 1.0.4
 
 - Unnecessary strict dependencies fix

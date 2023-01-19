@@ -1,7 +1,9 @@
 name: flame_tiled_utils
-description: A set of useful utils to extend tiled functionality
-version: 1.0.4
+description: A set of useful utils to extend tiled functionality, such as processing each tile
+  individually, easy loading tile's sprite or animation, compositing tiles into single image
+version: 1.0.5
 homepage: https://github.com/ASGAlex/flame_tiled_utils
+repository: https://github.com/ASGAlex/flame_tiled_utils
 
 environment:
   sdk: '>=2.17.6 <3.0.0'
@@ -10,6 +12,8 @@ dependencies:
   flame: ^1.2.1
   flame_tiled: ^1.6.0
   tiled: any
+  flutter:
+    sdk: flutter
 
 dev_dependencies:
   lints: ^2.0.0
