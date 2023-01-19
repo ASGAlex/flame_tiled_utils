@@ -5,7 +5,6 @@ import 'package:flame/components.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/image_composition.dart';
 import 'package:flame_tiled/flame_tiled.dart';
-import 'package:tiled/tiled.dart';
 
 typedef TileProcessorFunc = Future Function(
     TileProcessor tile, Vector2 position, Vector2 size);

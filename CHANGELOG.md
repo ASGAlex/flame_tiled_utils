@@ -1,3 +1,8 @@
+## 1.0.4
+
+- Unnecessary strict dependencies fix
+
+
 ## 1.0.3
 
 - Update examples, use toImageSafe for images recording

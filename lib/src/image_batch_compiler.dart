@@ -4,7 +4,6 @@ import 'dart:ui';
 import 'package:flame/components.dart';
 import 'package:flame/image_composition.dart';
 import 'package:flame_tiled/flame_tiled.dart';
-import 'package:tiled/tiled.dart';
 
 /// Utility class to compile multiple tiles into one image.
 /// Usage example:
