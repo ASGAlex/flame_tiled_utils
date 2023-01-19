@@ -30,7 +30,7 @@ dependencies:
   args: any
   flame: ^1.6.0
   flame_tiled: ^1.9.1
-  flame_tiled_utils: ^1.0.2
+  flame_tiled_utils: ^1.0.4
 #    path: ../
   flutter:
     sdk: flutter
