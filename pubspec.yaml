@@ -9,7 +9,7 @@ environment:
 dependencies:
   flame: ^1.2.1
   flame_tiled: ^1.6.0
-  tiled: ^0.8.4
+  tiled: any
 
 dev_dependencies:
   lints: ^2.0.0
