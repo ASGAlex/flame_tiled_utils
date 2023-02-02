@@ -1,8 +1,6 @@
-import 'dart:async';
 import 'dart:ui';
 
 import 'package:flame/components.dart';
-import 'package:flame/image_composition.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 
 /// Utility class to compile multiple tiles into one image.
@@ -16,8 +14,8 @@ import 'package:flame_tiled/flame_tiled.dart';
 /// add(ground);
 /// ```
 class ImageBatchCompiler {
-  Future<PositionComponent> compileMapLayer(
-      {required RenderableTiledMap tileMap, List<String>? layerNames}) async {
+  PositionComponent compileMapLayer(
+      {required RenderableTiledMap tileMap, List<String>? layerNames}) {
     layerNames ??= [];
     _unlistedLayers(tileMap, layerNames).forEach((element) {
       element.visible = false;
@@ -34,13 +32,13 @@ class ImageBatchCompiler {
     _unlistedLayers(tileMap, layerNames).forEach((element) {
       element.visible = true;
     });
-    for (var rl in tileMap.renderableLayers) {
+    for (final rl in tileMap.renderableLayers) {
       rl.refreshCache();
     }
 
-    final image = await picture.toImageSafe(
-        tileMap.map.width * tileMap.map.tileWidth,
+    final image = picture.toImageSync(tileMap.map.width * tileMap.map.tileWidth,
         tileMap.map.height * tileMap.map.tileHeight);
+    picture.dispose();
 
     return _ImageComponent(image);
   }

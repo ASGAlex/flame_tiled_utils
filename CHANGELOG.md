@@ -1,3 +1,7 @@
+## 1.0.6
+
+- Using toImageSync to make rendering faster with Flutter 3.7+ version
+
 ## 1.0.5
 
 - Cosmetic fixes for pub.dev
