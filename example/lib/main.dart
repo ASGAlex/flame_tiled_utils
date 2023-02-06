@@ -28,13 +28,13 @@ class TestGame extends FlameGame with KeyboardEvents, ScrollDetector {
     } else {
       final imageCompiler = ImageBatchCompiler();
       // Adding separate ground layer
-      final ground = await imageCompiler.compileMapLayer(
+      final ground = imageCompiler.compileMapLayer(
           tileMap: tiledComponent.tileMap, layerNames: ['ground']);
       ground.priority = -1;
       add(ground);
 
       // Adding separate tree layer
-      final tree = await imageCompiler.compileMapLayer(
+      final tree = imageCompiler.compileMapLayer(
           tileMap: tiledComponent.tileMap, layerNames: ['tree']);
       tree.priority = 3;
       add(tree);

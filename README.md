@@ -21,7 +21,7 @@ convert it into special component:
 ```dart
 final mapComponent = await TiledComponent.load('map.tmx', Vector2.all(16));
 final imageCompiler = ImageBatchCompiler();
-final ground = await imageCompiler.compileMapLayer(tileMap: mapComponent.tileMap, layerNames: ['ground']);
+final ground = imageCompiler.compileMapLayer(tileMap: mapComponent.tileMap, layerNames: ['ground']);
 ground.priority = RenderPriority.ground.priority;
 add(ground);
 ```
