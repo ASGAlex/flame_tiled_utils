@@ -1,3 +1,7 @@
+## 1.0.7
+
+- Using toImageSync in ImageCompositor (for animated tiles)
+
 ## 1.0.6
 
 - Using toImageSync to make rendering faster with Flutter 3.7+ version
@@ -10,21 +14,17 @@
 
 - Unnecessary strict dependencies fix
 
-
 ## 1.0.3
 
 - Update examples, use toImageSafe for images recording
-
 
 ## 1.0.2
 
 - Make TileProcessor.processTileType async
 
-
 ## 1.0.1
 
 - Add working example
-
 
 ## 1.0.0
 

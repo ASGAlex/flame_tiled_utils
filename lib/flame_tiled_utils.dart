@@ -18,4 +18,5 @@ library flame_tiled_utils;
 
 export 'src/animation_batch_compiler.dart';
 export 'src/image_batch_compiler.dart';
+export 'src/image_composition.dart';
 export 'src/tile_processor.dart';

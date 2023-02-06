@@ -2,8 +2,7 @@ import 'dart:async';
 
 import 'package:flame/components.dart';
 import 'package:flame/image_composition.dart';
-
-import 'tile_processor.dart';
+import 'package:flame_tiled_utils/flame_tiled_utils.dart';
 
 /// Utility class to merge multiple animated components into one big component
 /// Usage example:
@@ -55,11 +54,11 @@ class AnimationBatchCompiler {
 
     while (anim.currentIndex < anim.frames.length) {
       final sprite = anim.getSprite();
-      final composition = ImageComposition();
+      final composition = ImageCompositionExt();
       for (final pos in positions) {
         composition.add(sprite.image, pos, source: sprite.src);
       }
-      final composedImage = await composition.compose();
+      final composedImage = composition.compose();
       newSprites.add(Sprite(composedImage));
       anim.currentIndex++;
     }
