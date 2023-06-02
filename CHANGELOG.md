@@ -1,3 +1,7 @@
+## 1.1.0
+
+- Breaking: upgrade to Flame 1.8.0
+
 ## 1.0.7
 
 - Using toImageSync in ImageCompositor (for animated tiles)

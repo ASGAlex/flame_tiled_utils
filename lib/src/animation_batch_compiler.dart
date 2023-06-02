@@ -49,18 +49,18 @@ class AnimationBatchCompiler {
     if (anim == null) {
       throw "Can't compile while animation is not loaded!";
     }
-
+    final ticker = anim.ticker();
     List<Sprite> newSprites = [];
 
-    while (anim.currentIndex < anim.frames.length) {
-      final sprite = anim.getSprite();
+    while (ticker.currentIndex < anim.frames.length) {
+      final sprite = ticker.getSprite();
       final composition = ImageCompositionExt();
       for (final pos in positions) {
         composition.add(sprite.image, pos, source: sprite.src);
       }
       final composedImage = composition.compose();
       newSprites.add(Sprite(composedImage));
-      anim.currentIndex++;
+      ticker.currentIndex++;
     }
     final spriteAnimation = SpriteAnimation.variableSpriteList(newSprites,
         stepTimes: anim.getVariableStepTimes());
