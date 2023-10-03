@@ -1,3 +1,7 @@
+## 1.1.1
+
+- Breaking: upgrade to Flame 1.9.1
+
 ## 1.1.0
 
 - Breaking: upgrade to Flame 1.8.0

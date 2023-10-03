@@ -28,9 +28,9 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   args: any
-  flame: ^1.8.0
-  flame_tiled: ^1.10.2
-  flame_tiled_utils: ^1.1.0
+  flame: ^1.9.1
+  flame_tiled: ^1.14.1
+  flame_tiled_utils: ^1.1.1
 #    path: ../
   flutter:
     sdk: flutter
