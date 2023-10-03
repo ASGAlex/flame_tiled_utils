@@ -49,7 +49,7 @@ class AnimationBatchCompiler {
     if (anim == null) {
       throw "Can't compile while animation is not loaded!";
     }
-    final ticker = anim.ticker();
+    final ticker = anim.createTicker();
     List<Sprite> newSprites = [];
 
     while (ticker.currentIndex < anim.frames.length) {
