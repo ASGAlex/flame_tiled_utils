@@ -1,4 +1,3 @@
-import 'package:flame/camera.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
@@ -16,7 +15,10 @@ void main(List<String> args) async {
 }
 
 class TestGame extends FlameGame with KeyboardEvents, ScrollDetector {
-  TestGame(this.renderingMode);
+  TestGame(this.renderingMode)
+      : super(
+          camera: CameraComponent.withFixedResolution(width: 500, height: 250),
+        );
 
   MapRenderingMode renderingMode;
 
@@ -85,7 +87,6 @@ class TestGame extends FlameGame with KeyboardEvents, ScrollDetector {
     }
 
     camera.viewport.add(FpsTextComponent());
-    camera.viewport = FixedResolutionViewport(resolution: Vector2(500, 250));
     camera.moveTo(Vector2(0, 500));
     camera.viewfinder.zoom = 1;
   }
