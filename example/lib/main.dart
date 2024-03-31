@@ -1,4 +1,6 @@
+import 'package:flame/camera.dart';
 import 'package:flame/components.dart';
+import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flame/input.dart';
 import 'package:flame_tiled/flame_tiled.dart';
@@ -24,20 +26,20 @@ class TestGame extends FlameGame with KeyboardEvents, ScrollDetector {
         await TiledComponent.load('example.tmx', Vector2.all(8));
 
     if (renderingMode == MapRenderingMode.standard) {
-      add(tiledComponent);
+      world.add(tiledComponent);
     } else {
       final imageCompiler = ImageBatchCompiler();
       // Adding separate ground layer
       final ground = imageCompiler.compileMapLayer(
           tileMap: tiledComponent.tileMap, layerNames: ['ground']);
       ground.priority = -1;
-      add(ground);
+      world.add(ground);
 
       // Adding separate tree layer
       final tree = imageCompiler.compileMapLayer(
           tileMap: tiledComponent.tileMap, layerNames: ['tree']);
       tree.priority = 3;
-      add(tree);
+      world.add(tree);
 
       if (renderingMode == MapRenderingMode.optimizedOnlyStatic) {
         //Process every tile of layer "water"
@@ -50,7 +52,7 @@ class TestGame extends FlameGame with KeyboardEvents, ScrollDetector {
                 final animation = await tile.getSpriteAnimation();
                 // Creating animation object for every found tile.
                 // Simple but very expensive approach.
-                add(SpriteAnimationComponent(
+                world.add(SpriteAnimationComponent(
                     animation: animation,
                     position: position,
                     size: Vector2.all(8),
@@ -78,33 +80,34 @@ class TestGame extends FlameGame with KeyboardEvents, ScrollDetector {
         // Compile SpriteAnimation component from list of animated tiles.
         final animatedWater = await animationCompiler.compile();
         animatedWater.priority = 2;
-        add(animatedWater);
+        world.add(animatedWater);
       }
     }
 
-    add(FpsTextComponent());
-    camera.viewport = FixedResolutionViewport(Vector2(500, 250));
-    camera.snapTo(Vector2(0, 500));
-    camera.zoom = 1;
+    camera.viewport.add(FpsTextComponent());
+    camera.viewport = FixedResolutionViewport(resolution: Vector2(500, 250));
+    camera.moveTo(Vector2(0, 500));
+    camera.viewfinder.zoom = 1;
   }
 
   @override
   KeyEventResult onKeyEvent(
-    RawKeyEvent event,
+    KeyEvent event,
     Set<LogicalKeyboardKey> keysPressed,
   ) {
+    const speed = 40.0;
     for (final key in keysPressed) {
       if (key == LogicalKeyboardKey.keyW) {
-        camera.translateBy(Vector2(0, -300));
+        camera.moveBy(Vector2(0, -5), speed: speed);
       }
       if (key == LogicalKeyboardKey.keyA) {
-        camera.translateBy(Vector2(-300, 0));
+        camera.moveBy(Vector2(-5, 0), speed: speed);
       }
       if (key == LogicalKeyboardKey.keyS) {
-        camera.translateBy(Vector2(0, 300));
+        camera.moveBy(Vector2(0, 5), speed: speed);
       }
       if (key == LogicalKeyboardKey.keyD) {
-        camera.translateBy(Vector2(300, 0));
+        camera.moveBy(Vector2(5, 0), speed: speed);
       }
     }
 
@@ -113,7 +116,7 @@ class TestGame extends FlameGame with KeyboardEvents, ScrollDetector {
 
   @override
   void onScroll(PointerScrollInfo info) {
-    camera.zoom += info.scrollDelta.game.y.sign * 0.08;
-    camera.zoom = camera.zoom.clamp(0.05, 5.0);
+    camera.viewfinder.zoom += info.scrollDelta.global.y.sign * 0.08;
+    camera.viewfinder.zoom = camera.viewfinder.zoom.clamp(0.05, 5.0);
   }
 }

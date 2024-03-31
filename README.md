@@ -14,7 +14,7 @@
 Instead of rendering tiled map as usual: 
 ```dart
 final mapComponent = await TiledComponent.load('map.tmx', Vector2.all(16));
-add(mapComponent);
+world.add(mapComponent);
 ```
 convert it into special component: 
 
@@ -23,7 +23,7 @@ final mapComponent = await TiledComponent.load('map.tmx', Vector2.all(16));
 final imageCompiler = ImageBatchCompiler();
 final ground = imageCompiler.compileMapLayer(tileMap: mapComponent.tileMap, layerNames: ['ground']);
 ground.priority = RenderPriority.ground.priority;
-add(ground);
+world.add(ground);
 ```
 
 The `layerNames` variable allows you to specify layers to convert. It is useful when different map
@@ -80,6 +80,6 @@ TileProcessor.processTileType(
         ]);
 final animatedWater = await animationCompiler.compile();
 animatedWater.priority = RenderPriority.water.priority;
-add(animatedWater);
+world.add(animatedWater);
 ```
 
