@@ -14,9 +14,14 @@ import 'package:flame_tiled/flame_tiled.dart';
 /// add(ground);
 /// ```
 class ImageBatchCompiler {
-  PositionComponent compileMapLayer(
-      {required RenderableTiledMap tileMap, List<String>? layerNames}) {
+  PositionComponent compileMapLayer({
+    required RenderableTiledMap tileMap,
+    List<String>? layerNames,
+    Paint? paint,
+  }) {
     layerNames ??= [];
+    paint ??= Paint();
+
     _unlistedLayers(tileMap, layerNames).forEach((element) {
       element.visible = false;
     });
@@ -40,7 +45,7 @@ class ImageBatchCompiler {
         tileMap.map.height * tileMap.map.tileHeight);
     picture.dispose();
 
-    return _ImageComponent(image);
+    return _ImageComponent(image, paint);
   }
 
   static List<Layer> _unlistedLayers(
@@ -56,12 +61,13 @@ class ImageBatchCompiler {
 }
 
 class _ImageComponent extends PositionComponent {
-  _ImageComponent(this.image);
+  _ImageComponent(this.image, this.paint);
 
   final Image image;
+  final Paint paint;
 
   @override
   void render(Canvas canvas) {
-    canvas.drawImage(image, const Offset(0, 0), Paint());
+    canvas.drawImage(image, const Offset(0, 0), paint);
   }
 }
