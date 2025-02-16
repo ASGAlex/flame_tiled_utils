@@ -1,3 +1,9 @@
+## 1.3.0
+
+- Breaking: upgrade to Flame 1.28.1
+- Allow passing a external Paint object.
+- Take spacing and margin into consideration.
+
 ## 1.2.0
 
 - Breaking: upgrade to Flame 1.17.0
