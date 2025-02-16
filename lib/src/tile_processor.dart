@@ -86,11 +86,21 @@ class TileProcessor {
       final row = ((tileId + 0.9) ~/ maxColumns) + 1;
       final column = (tileId + 1) - ((row - 1) * maxColumns);
 
-      cachedSprite = Sprite(spriteSheetImg,
-          srcPosition: Vector2(((column - 1) * tileset.tileWidth!).toDouble(),
-              ((row - 1) * tileset.tileHeight!).toDouble()),
-          srcSize: Vector2(
-              tileset.tileWidth!.toDouble(), tileset.tileHeight!.toDouble()));
+      final margin = tileset.margin;
+      final spacing = tileset.spacing;
+      final tileWidth = tileset.tileWidth!;
+      final tileHeight = tileset.tileHeight!;
+
+      final srcX = margin + (column - 1) * (tileWidth + spacing);
+      final srcY = margin + (row - 1) * (tileHeight + spacing);
+
+      cachedSprite = Sprite(
+        spriteSheetImg,
+        srcPosition: Vector2(srcX.toDouble(), srcY.toDouble()),
+        srcSize: Vector2(
+            tileWidth.toDouble() - 0.0001, tileHeight.toDouble() - 0.0001),
+      );
+
       _spriteCache[key] = cachedSprite;
     }
     return cachedSprite;
@@ -124,9 +134,12 @@ class TileProcessor {
   int _maxColumns(TiledImage image) {
     final maxWidth = image.width;
     final tileWidth = tileset.tileWidth;
+    final margin = tileset.margin;
+    final spacing = tileset.spacing;
+
     if (maxWidth == null || tileWidth == null) throw 'No tile dimensions';
 
-    return maxWidth ~/ tileWidth;
+    return (maxWidth - 2 * margin + spacing) ~/ (tileWidth + spacing);
   }
 
   Image? _getImageCache(String image) {
