@@ -1,3 +1,7 @@
+## 1.3.1
+
+- Add option parameter useRelativePath
+
 ## 1.3.0
 
 - Breaking: upgrade to Flame 1.28.1
