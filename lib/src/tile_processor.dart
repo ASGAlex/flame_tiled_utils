@@ -64,7 +64,7 @@ class TileProcessor {
     _imageCache.clear();
   }
 
-  Future<Sprite> getSprite([int tileId = -1]) async {
+  Future<Sprite> getSprite({int tileId = -1, bool useRelativePath = false}) async {
     if (tileId == -1) {
       tileId = tile.localId;
     }
@@ -79,7 +79,13 @@ class TileProcessor {
     if (cachedSprite == null) {
       Image? spriteSheetImg = _getImageCache(src);
       if (spriteSheetImg == null) {
-        spriteSheetImg = await Flame.images.load(src);
+        if(useRelativePath){
+          var newPath = extractRelativeImagePath(src);
+          spriteSheetImg = await Flame.images.load(newPath);
+        }else{
+          spriteSheetImg = await Flame.images.load(src);
+        }
+
         _imageCache[src] = spriteSheetImg;
       }
       final maxColumns = _maxColumns(image);
@@ -106,7 +112,7 @@ class TileProcessor {
     return cachedSprite;
   }
 
-  Future<SpriteAnimation?> getSpriteAnimation() async {
+  Future<SpriteAnimation?> getSpriteAnimation({bool useRelativePath = false}) async {
     final image = tileset.image;
     if (image == null) throw 'Cant load sprite without image';
 
@@ -120,7 +126,7 @@ class TileProcessor {
       final List<Sprite> spriteList = [];
       final List<double> stepTimes = [];
       for (final frame in tile.animation) {
-        final sprite = await getSprite(frame.tileId);
+        final sprite = await getSprite(tileId: frame.tileId, useRelativePath: useRelativePath);
         spriteList.add(sprite);
         stepTimes.add(frame.duration / 1000);
       }
@@ -214,5 +220,15 @@ class TileProcessor {
         rl.refreshCache();
       }
     }
+  }
+
+  String extractRelativeImagePath(String rawPath) {
+    final normalized = Uri.parse(rawPath).normalizePath().toString();
+
+    final marker = 'images/';
+    final index = normalized.lastIndexOf(marker);
+    if (index == -1) return normalized; // fallback: kembalikan apa adanya
+
+    return normalized.substring(index + marker.length);
   }
 }
