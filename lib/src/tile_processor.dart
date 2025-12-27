@@ -64,7 +64,7 @@ class TileProcessor {
     _imageCache.clear();
   }
 
-  Future<Sprite> getSprite({int tileId = -1, bool useRelativePath = false}) async {
+  Future<Sprite> getSprite({int tileId = -1, bool useRelativePath = false, double setOffsetCorrection = 0.0001}) async {
     if (tileId == -1) {
       tileId = tile.localId;
     }
@@ -104,7 +104,7 @@ class TileProcessor {
         spriteSheetImg,
         srcPosition: Vector2(srcX.toDouble(), srcY.toDouble()),
         srcSize: Vector2(
-            tileWidth.toDouble() - 0.0001, tileHeight.toDouble() - 0.0001),
+            tileWidth.toDouble() - setOffsetCorrection, tileHeight.toDouble() - setOffsetCorrection),
       );
 
       _spriteCache[key] = cachedSprite;
@@ -112,7 +112,7 @@ class TileProcessor {
     return cachedSprite;
   }
 
-  Future<SpriteAnimation?> getSpriteAnimation({bool useRelativePath = false}) async {
+  Future<SpriteAnimation?> getSpriteAnimation({bool useRelativePath = false, double setOffsetCorrection = 0.0001}) async {
     final image = tileset.image;
     if (image == null) throw 'Cant load sprite without image';
 
@@ -126,7 +126,7 @@ class TileProcessor {
       final List<Sprite> spriteList = [];
       final List<double> stepTimes = [];
       for (final frame in tile.animation) {
-        final sprite = await getSprite(tileId: frame.tileId, useRelativePath: useRelativePath);
+        final sprite = await getSprite(tileId: frame.tileId, useRelativePath: useRelativePath, setOffsetCorrection: setOffsetCorrection);
         spriteList.add(sprite);
         stepTimes.add(frame.duration / 1000);
       }

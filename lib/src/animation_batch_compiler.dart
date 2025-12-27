@@ -30,10 +30,10 @@ class AnimationBatchCompiler {
   List<Vector2> positions = [];
   final Completer _completer = Completer();
 
-  Future addTile(Vector2 position, TileProcessor tileProcessor, {bool useRelativePath = false}) async {
+  Future addTile(Vector2 position, TileProcessor tileProcessor, {bool useRelativePath = false, double setOffsetCorrection = 0.0001}) async {
     if (animation == null && _loading == false) {
       _loading = true;
-      animation = await tileProcessor.getSpriteAnimation(useRelativePath: useRelativePath);
+      animation = await tileProcessor.getSpriteAnimation(useRelativePath: useRelativePath, setOffsetCorrection: setOffsetCorrection);
       if (animation == null) {
         _loading = false;
       } else {
